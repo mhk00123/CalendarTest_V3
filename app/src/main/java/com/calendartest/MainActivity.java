@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> myAd;  //清單內容排版物件，可自訂清單內容與排版
 
     itemDAO get_data;
-    Item result,test123;
+    Item result,test1234;
 
     public DBHelper dbHelper;
     public SQLiteDatabase db;

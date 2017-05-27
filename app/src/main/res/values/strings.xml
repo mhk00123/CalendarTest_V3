@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">CalendarTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_event_name">活動名稱</string>
+    <string name="add_event_location">活動地點</string>
+    <string name="add_event_all_day">全天活動</string>
+    <string name="add_event_repeat_frequency">重複頻率</string>
+    <string-array name="repeat_frequency">
+        <item name="once">單次活動</item>
+        <item name="everyday">每天</item>
+        <item name="every_workday">每個工作日</item>
+        <item name="every_week">每週</item>
+        <item name="every_month">每月</item>
+        <item nema="every_year">每年</item>
+    </string-array>
+
+    <string name="add_event_privacy">隱私權</string>
+    <string-array name="privacy">
+        <item name="event_public">公開</item>
+        <item name="event_private">私人</item>
+    </string-array>
+
+    <string name="add_event_remind">提醒</string>
+    <string-array name="remind">
+        <item name="5minutes">5分鐘</item>
+        <item name="10minutes">10分鐘</item>
+        <item name="15minutes">15分鐘</item>
+        <item name="20minutes">20分鐘</item>
+        <item name="25minutes">25分鐘</item>
+        <item name="30minutes">30分鐘</item>
+        <item name="1hour">1小時</item>
+        <item name="2hours">2小時</item>
+        <item name="3hours">3小時</item>
+        <item name="12hours">12小時</item>
+        <item name="24hours">24小時</item>
+        <item name="two_day">2天</item>
+        <item name="one_week">一週</item>
+    </string-array>
+
+    <string name="add_event_description">活動說明</string>
+
+    <string-array name="colorArray">
+        <item name="colorDimGray">暗灰色(預設)</item>
+        //預設暗灰色
+        <item name="colorRed">紅色</item>
+        //紅色
+        <item name="colorOrangeRed">橙紅色</item>
+        //橙紅色
+        <item name="colorGold">金黃色</item>
+        //金黃色
+        <item name="colorLawnGreen">草綠色</item>
+        //草綠色
+        <item name="colorForestGreen">森林綠</item>
+        //森林綠
+        <item name="colorLightSeaGreen">亮海藍</item>
+        //亮海藍
+        <item name="colorRoyalBlue">皇家藍</item>
+        //皇家藍
+        <item name="colorBlueViolet">紫羅蘭</item>
+        //紫羅蘭
+    </string-array>
+</resources>

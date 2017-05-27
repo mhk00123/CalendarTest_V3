@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorDimGray">#696969</color>  //預設暗灰色
+    <color name="colorRed">#FF0000</color>  //紅色
+    <color name="colorOrangeRed">#FF4500</color>    //橙紅色
+    <color name="colorGold">#FFD700</color>     //金黃色
+    <color name="colorLawnGreen">#7CFC00</color>    //草綠色
+    <color name="colorForestGreen">#228B22</color>  //森林綠
+    <color name="colorLightSeaGreen">#20B2AA</color>    //亮海藍
+    <color name="colorRoyalBlue">#4169E1</color>    //皇家藍
+    <color name="colorBlueViolet">#8A2BE2</color>   //紫羅蘭
+</resources>

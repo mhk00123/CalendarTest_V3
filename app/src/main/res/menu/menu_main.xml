@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.calendartest.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/mode_month"
+                android:icon="@android:drawable/ic_menu_month"
+                android:title="月檢視" />
+            <item
+                android:id="@+id/mode_week"
+                android:icon="@android:drawable/ic_menu_week"
+                android:title="週檢視" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_today"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="今天"
+        app:showAsAction="ifRoom" />
+
+</menu>

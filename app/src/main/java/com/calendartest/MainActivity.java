@@ -8,13 +8,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> myAd;  //清單內容排版物件，可自訂清單內容與排版
 
     itemDAO get_data;
-    Item result,test1234;
+    Item result;
 
     public DBHelper dbHelper;
     public SQLiteDatabase db;
@@ -47,16 +47,19 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper(this.getApplicationContext(), null, null, 1);
         db = DBHelper.getDatabase(this.getApplicationContext());
-
         get_data = new itemDAO(this);
         result = new Item();
+        c = Calendar.getInstance();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            String time = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
+
             @Override
             public void onClick(View view) {
                 Intent toAdd = new Intent(MainActivity.this, AddEventActivity.class);
                 toAdd.putExtra("Date", event_list.getItemAtPosition(0).toString());
+                toAdd.putExtra("Time", time);
                 startActivityForResult(toAdd, 200);
             }
         });
@@ -64,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Calendar");
 
         mcv = (MaterialCalendarView) findViewById(R.id.calendarView); //物件實體化
-        c = Calendar.getInstance(); //取得目前時間
         mcv.setSelectedDate(c); //預選目前時間
 
         event_list = (ListView) findViewById(R.id.eventList);   //活動清單物件實體化

@@ -1,19 +1,26 @@
 package com.calendartest;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class AddEventActivity extends AppCompatActivity {
     //UI Component
@@ -25,7 +32,7 @@ public class AddEventActivity extends AppCompatActivity {
     //all components text
     String name, location, dateFrom, dateTo, timeFrom, timeTo,
             repeatFrequency, privacy, remind, description, color;
-    String[] colorArray=new String[12];
+    String[] colorArray = new String[12];
     int temp = 0;
 
     // Intent instance
@@ -68,8 +75,36 @@ public class AddEventActivity extends AppCompatActivity {
 
         txtDateFrom.setText(getData.getStringExtra("Date"));
         txtDateTo.setText(getData.getStringExtra("Date"));
-        txtTimeFrom.setText("12點");
-        txtTimeTo.setText("12點");
+        txtTimeFrom.setText(getData.getStringExtra("Time"));
+        txtTimeTo.setText(getData.getStringExtra("Time"));
+
+        txtDateFrom.setOnClickListener(new View.OnClickListener() { //日期選擇事件
+            @Override
+            public void onClick(View v) {
+                showDataPickerDialogFrom();
+            }
+        });
+
+        txtDateTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDataPickerDialogTo();
+            }
+        });
+
+        txtTimeFrom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialogFrom();
+            }
+        });
+
+        txtTimeTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialogTo();
+            }
+        });
 
         btnColorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +181,7 @@ public class AddEventActivity extends AppCompatActivity {
                 datadao.insert(data);   //input to DB
                 toMain = new Intent();
                 setResult(RESULT_OK, toMain);
-                Toast.makeText(AddEventActivity.this,"success",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddEventActivity.this, "success", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
@@ -180,4 +215,61 @@ public class AddEventActivity extends AppCompatActivity {
         data.setColor(color);
     }
 
+    public void showDataPickerDialogFrom() {
+        final Calendar date = Calendar.getInstance();
+        int mYear = date.get(Calendar.YEAR);
+        int mMonth = date.get(Calendar.MONTH);
+        int mDay = date.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                txtDateFrom.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    public void showDataPickerDialogTo() {
+        final Calendar date = Calendar.getInstance();
+        int mYear = date.get(Calendar.YEAR);
+        int mMonth = date.get(Calendar.MONTH);
+        int mDay = date.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                txtDateTo.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    public void showTimePickerDialogFrom() {
+        final Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR_OF_DAY);
+        int mMinute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                txtTimeFrom.setText(hourOfDay + ":" + minute);
+            }
+        }, mHour, mMinute, false);
+        timePickerDialog.show();
+    }
+
+    public void showTimePickerDialogTo() {
+        final Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR_OF_DAY);
+        int mMinute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                txtTimeFrom.setText(hourOfDay + ":" + minute);
+            }
+        }, mHour, mMinute, false);
+        timePickerDialog.show();
+    }
 }

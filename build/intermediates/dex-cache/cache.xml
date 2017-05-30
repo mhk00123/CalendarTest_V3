@@ -2,6 +2,24 @@
 <items version="2" >
 
     <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\8e1ac0f23083af0c240bf793841880314801fc70\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_3ade58f9efc74e29dca83bbdc769e9800b53d1a7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\4cb7bce993bd78e4e85b1a69c0fda6fe66d1c0dd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_12c266057dde475943b7b6ad0bff6e8ae423760e.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
@@ -11,6 +29,78 @@
         <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_2a0209617cac5e188506392b898db03bd1d30a7c\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\0314c24786c216631886c3fc8e3e9c0afd7c2d47\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_28461df057abbbf97b8280b44c17c7f8b628e413.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\154c4a7eebd6b3fb086fe24e4a30f71d8604e0a4\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5094eccf53998e9bcacfb85f80e7607b39b093fd">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_035a1373d6f80a1ad02fc42c19bdf96954d66f68.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\43edd6fbdbe082f19330d16095bc5b95968b480b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_a05ec52cbad89b2952db9b098cf61da42432da10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\9f26020d2a07d4f8aef6f70135fcff6fa11f4995\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_080a1bf980e482c88a80a9e50d7aa06ef2af8fd1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\e3d57723a615b19a12cb6284b2c8a424d4bbadfb\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_3ae3ea820fbe7ce31213c2e4a6c65f6adafa6460.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\68b9440610d27cdf6e27a2e441538f3317b36b61\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_7e602ff17cb7652c9d9f52857b662c99abde3473.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\1ffc3f9ce56f2976ab6caca8c8ecc8e30377e787\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_e38ec715959313767791b3e5e5523573eed7acf8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\c4c9ffde456258a591a1d3e9a22b887d08fba73d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_e72fcd7b0f72bf1c9c64276ca43276a8be22057a.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
@@ -18,6 +108,60 @@
         revision="25.0.2"
         sha1="5d282e4e9234aee85298b793c1ce7f1f0b222991">
         <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_387a0c6ecb1cc21c2b86c7d3cfb92b9e2bcc398d\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\6d6a55caf32081cc670b4c4357a8c1ce2409686e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_84ee1fa23ba175e3aa554e4975d5e66f68166c4d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\527f7f163db86b9427582a3f384159b49978b091\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_a60cada9d848de1b2350f4bd74225a81c11bf284.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\4c4f5fd870aae02ded11855cc731417bb62faa91\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_e9c2d4d2d7e6c13197d4acfb87de085a723a22d3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\.android\build-cache\36ce1c40996d6a97182be737efb87dcca3d8ecf9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\classes_b208d6d8b14c96654700b2990fbb9c325573e57f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.2_56cb9135bf1bd704eeaa78bb7e1de36312cfdd96.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\user\AndroidStudioProjects\CalendarTest\app\build\intermediates\pre-dexed\debug\support-annotations-25.3.1_a5a2825b34de3f3f7ae9d3d699d30b462eec82a0.jar" />
     </item>
 
 </items>

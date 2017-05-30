@@ -13,8 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+import android.widget.SimpleAdapter;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -23,6 +22,8 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         get_data = new itemDAO(this);
         result = new Item();
         c = Calendar.getInstance();
+        event_array = new ArrayList<>();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -75,9 +77,8 @@ public class MainActivity extends AppCompatActivity {
         mcv.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                event_array = new ArrayList<>();
-                String event_date = date.getYear() + "年" + (date.getMonth() + 1) + "月" + date.getDay() + "日";
-                event_array.add(event_date);
+                event_array.clear();
+                event_array.add(convertCalendar(date.getCalendar()));
                 myAd = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, event_array);
                 event_list.setAdapter(myAd);
             }
@@ -104,21 +105,26 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        int tag = 0;
         switch (id) {
             case R.id.mode_month:
                 mcv.state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit();
+                tag = 0;
                 break;
             case R.id.mode_week:
                 mcv.state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit();
                 mcv.goToNext();
+                tag = 1;
                 break;
             case R.id.action_today:
                 mcv.setCurrentDate(c);
                 mcv.setSelectedDate(c);
-//                mcv.goToNext();
                 refreshList(c);
                 break;
         }
+
+        if (tag == 1) mcv.goToNext();
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -126,33 +132,45 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == RESULT_OK) {
-            Cursor result = db.rawQuery("SELECT * FROM EventLog", null);
-            if (!result.moveToNext()) {
-                event_array = new ArrayList<>();
-                event_array.add("No Event!");
-                myAd = new ArrayAdapter<>(MainActivity.this,
-                        android.R.layout.simple_list_item_1, event_array);
+            Cursor result = db.rawQuery("SELECT _id, Name, Color FROM EventLog", null);
+            if (result.getCount() == 0) {
+                event_array.clear();
+                event_array.add(convertCalendar(mcv.getSelectedDate().getCalendar()));
+                event_array.add("No Event Today");
+                myAd = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, event_array);
                 event_list.setAdapter(myAd);
             } else if (result.moveToNext()) {
-                SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                        MainActivity.this, android.R.layout.simple_list_item_1,
-                        result, new String[]{"Name"},
-                        new int[]{android.R.id.text1},
-                        0
+                ArrayList<Map<String, Object>> itemList = null;
+                for (int i = 0; i < result.getCount(); i++) {
+                    itemList = new ArrayList<>();
+                    HashMap<String, Object> eventLog = new HashMap<>();
+                    eventLog.put("Name", result.getString(1));
+                    eventLog.put("Image", result.getInt(2));
+                    itemList.add(eventLog);
+                }
+
+                SimpleAdapter eventAdapter = new SimpleAdapter(
+                        MainActivity.this,
+                        itemList,
+                        R.layout.row_veiw,
+                        new String[]{"Name", "Image"},
+                        new int[]{R.id.txtName, R.id.imgColor}
                 );
-                event_list.setAdapter(adapter);
+
+                event_list.setAdapter(eventAdapter);
             }
         }
-
     }
 
     void refreshList(Calendar cal) {
-        String date = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH);
         event_array = new ArrayList<>();
-        event_array.add(date);
+        event_array.add(convertCalendar(cal));
         myAd = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, event_array);
         event_list.setAdapter(myAd);
     }
 
-
+    public String convertCalendar(Calendar cal) {
+        String date = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH);
+        return date;
+    }
 }

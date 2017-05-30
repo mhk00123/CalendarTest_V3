@@ -207,6 +207,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="50dp"
             android:ems="13"
+            android:textColor="#000000"
             android:hint="@string/add_event_description"
             android:inputType="textPersonName" />
 

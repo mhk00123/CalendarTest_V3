@@ -16,7 +16,7 @@ public class Item implements Serializable {
     private String Privacy;
     private String Description;
     private String Remind;
-    private String Color;
+    private int Color;
 
     // 預設建構子
     public Item() {
@@ -25,7 +25,7 @@ public class Item implements Serializable {
 
     public Item(long id, String name, String location, String date_from, String date_to,
                 String time_from, String time_to, String repeatFrequency,
-                String privacy, String description, String remind, String color) {
+                String privacy, String description, String remind, int color) {
         this.id = id;
         this.Name = name;
         this.Location = location;
@@ -49,7 +49,7 @@ public class Item implements Serializable {
     }
 
     public String getName() {
-        return this.Name;
+        return this.Name == null ? "" : this.Name;
     }
 
     public void setName(String name) {
@@ -57,7 +57,7 @@ public class Item implements Serializable {
     }
 
     public String getLocation() {
-        return this.Location;
+        return this.Location == null ? "" : this.Location;
     }
 
     public void setLocation(String location) {
@@ -65,7 +65,7 @@ public class Item implements Serializable {
     }
 
     public String getDate_from() {
-        return this.Date_from;
+        return this.Date_from == null ? "" : this.Date_from;
     }
 
     public void setDate_from(String date_from) {
@@ -73,7 +73,7 @@ public class Item implements Serializable {
     }
 
     public String getDate_to() {
-        return this.Date_to;
+        return this.Date_to == null ? "" : this.Date_from;
     }
 
     public void setDate_to(String date_to) {
@@ -81,7 +81,7 @@ public class Item implements Serializable {
     }
 
     public String getTime_from() {
-        return this.Time_from;
+        return this.Time_from == null ? "" : this.Time_from;
     }
 
     public void setTime_from(String time_from) {
@@ -89,7 +89,7 @@ public class Item implements Serializable {
     }
 
     public String getTime_to() {
-        return this.Time_to;
+        return this.Time_to == null ? "" : this.Time_to;
     }
 
     public void setTime_to(String time_to) {
@@ -97,7 +97,7 @@ public class Item implements Serializable {
     }
 
     public String getRepeatFrequency() {
-        return this.RepeatFrequency;
+        return this.RepeatFrequency == null ? "" : this.RepeatFrequency;
     }
 
     public void setRepeatFrequency(String repeatFrequency) {
@@ -105,7 +105,7 @@ public class Item implements Serializable {
     }
 
     public String getPrivacy() {
-        return this.Privacy;
+        return this.Privacy == null ? "" : this.Privacy;
     }
 
     public void setPrivacy(String privacy) {
@@ -113,7 +113,7 @@ public class Item implements Serializable {
     }
 
     public String getRemind() {
-        return this.Remind;
+        return this.Remind == null ? "" : this.Remind;
     }
 
     public void setRemind(String remind) {
@@ -121,18 +121,18 @@ public class Item implements Serializable {
     }
 
     public String getDescription() {
-        return this.Description;
+        return this.Description == null ? "" : this.Description;
     }
 
     public void setDescription(String description) {
         this.Description = description;
     }
 
-    public String getColor() {
+    public int getColor() {
         return this.Color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.Color = color;
     }
 }

@@ -5,10 +5,10 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,8 +31,9 @@ public class AddEventActivity extends AppCompatActivity {
 
     //all components text
     String name, location, dateFrom, dateTo, timeFrom, timeTo,
-            repeatFrequency, privacy, remind, description, color;
-    String[] colorArray = new String[12];
+            repeatFrequency, privacy, remind, description;
+
+    int colorImage; //顏色圖片
     int temp = 0;
 
     // Intent instance
@@ -67,11 +68,13 @@ public class AddEventActivity extends AppCompatActivity {
         remindPicker = (Spinner) findViewById(R.id.remindPicker);
         edtEventDescription = (EditText) findViewById(R.id.edtEventDescription);
 
+        edtEventDescription.setHint("活動說明");
+        edtEventDescription.setTextColor(Color.BLACK);
+
+        getResources().getDrawable(R.drawable.circle_icon_red, null);
 
         //get main data
         getData = getIntent();
-
-        colorArray = getResources().getStringArray(R.array.colorArray);
 
         txtDateFrom.setText(getData.getStringExtra("Date"));
         txtDateTo.setText(getData.getStringExtra("Date"));
@@ -109,6 +112,7 @@ public class AddEventActivity extends AppCompatActivity {
         btnColorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                colorImage = R.drawable.circle_icon_dim_gray;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(AddEventActivity.this);
                 builder.setTitle("活動色彩");
                 builder.setSingleChoiceItems(R.array.colorArray, temp, new DialogInterface.OnClickListener() {
@@ -117,43 +121,51 @@ public class AddEventActivity extends AppCompatActivity {
                         switch (which) {
                             case 0:
                                 btnColorPicker.setImageResource(R.drawable.palette_dimgray);
+                                colorImage = R.drawable.circle_icon_dim_gray;
                                 dialog.dismiss();
                                 break;
                             case 1:
                                 btnColorPicker.setImageResource(R.drawable.palette_red);
+                                colorImage = R.drawable.circle_icon_red;
                                 dialog.dismiss();
                                 break;
                             case 2:
                                 btnColorPicker.setImageResource(R.drawable.palette_orange_red);
+                                colorImage = R.drawable.circle_icon_orange_red;
                                 dialog.dismiss();
                                 break;
                             case 3:
                                 btnColorPicker.setImageResource(R.drawable.palette_gold);
+                                colorImage = R.drawable.circle_icon_gold;
                                 dialog.dismiss();
                                 break;
                             case 4:
                                 btnColorPicker.setImageResource(R.drawable.palette_lawn_green);
+                                colorImage = R.drawable.circle_icon_lawn_green;
                                 dialog.dismiss();
                                 break;
                             case 5:
                                 btnColorPicker.setImageResource(R.drawable.palette_forest_green);
+                                colorImage = R.drawable.circle_icon_forest_green;
                                 dialog.dismiss();
                                 break;
                             case 6:
                                 btnColorPicker.setImageResource(R.drawable.palette_light_sea_green);
+                                colorImage = R.drawable.circle_icon_light_sea_green;
                                 dialog.dismiss();
                                 break;
                             case 7:
                                 btnColorPicker.setImageResource(R.drawable.palette_royal_blue);
+                                colorImage = R.drawable.c_ircle_icon_royablue;
                                 dialog.dismiss();
                                 break;
                             case 8:
                                 btnColorPicker.setImageResource(R.drawable.palette_blue_violet);
+                                colorImage = R.drawable.circle_icon_blue_violet;
                                 dialog.dismiss();
                                 break;
                         }
-                        temp = which;
-                        color = colorArray[which];
+                        temp = which;   //上一次的選擇
                     }
                 });
 
@@ -180,6 +192,7 @@ public class AddEventActivity extends AppCompatActivity {
                 setData();  //input to item class
                 datadao.insert(data);   //input to DB
                 toMain = new Intent();
+                toMain.putExtra("Image", colorImage);
                 setResult(RESULT_OK, toMain);
                 Toast.makeText(AddEventActivity.this, "success", Toast.LENGTH_SHORT).show();
                 finish();
@@ -212,7 +225,7 @@ public class AddEventActivity extends AppCompatActivity {
         data.setPrivacy(privacy);
         data.setRemind(remind);
         data.setDescription(description);
-        data.setColor(color);
+        data.setColor(colorImage);
     }
 
     public void showDataPickerDialogFrom() {

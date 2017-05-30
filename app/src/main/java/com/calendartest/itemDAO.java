@@ -45,7 +45,7 @@ public class itemDAO {
                     + PRIVACY_COLUMN + " TEXT,"
                     + REMIND_COLUMN + " TEXT,"
                     + DESCRIPTION_COLUMN + " TEXT,"
-                    + COLOR_COLUMN + " TEXT"
+                    + COLOR_COLUMN + " INTEGER"
                     + ")";
 
     private SQLiteDatabase database;
@@ -80,14 +80,14 @@ public class itemDAO {
         return item;
     }
 
-    public Item getTest(Calendar cal) { //查詢資料
+    public Item get(Calendar cal) { //查詢資料
         String date = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH);
         // 準備回傳結果用的物件
         Item item = new Item();
         // 使用編號為查詢條件
         String where = DATE_FROM_COLUMN + "=" + date;
         // 執行查詢
-        Cursor result = database.query(TABEL_NAME, null, where, null, null, null, null);
+        Cursor result = database.query(TABEL_NAME, new String[]{"_id", "Name"}, where, null, null, null, null);
         // 如果有查詢結果
         if (result.moveToFirst()) {
             // 讀取包裝一筆資料的物件
@@ -113,7 +113,7 @@ public class itemDAO {
         result.setPrivacy(cursor.getString(8));
         result.setRemind(cursor.getString(9));
         result.setDescription(cursor.getString(10));
-        result.setColor(cursor.getString(11));
+        result.setColor(cursor.getInt(11));
 
         return result;
     }

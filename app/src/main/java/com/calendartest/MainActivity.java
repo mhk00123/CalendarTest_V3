@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -28,9 +29,9 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     MaterialCalendarView mcv;   //月曆物件
+    TextView txtDate;
     Calendar c; //時間物件
     ListView event_list;    //活動清單物件
-    ArrayList<String> event_array;  //活動內容陣列
     ArrayAdapter<String> myAd;  //清單內容排版物件，可自訂清單內容與排版
 
     itemDAO get_data;
@@ -46,12 +47,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setTitle("Calendar");
+
         dbHelper = new DBHelper(this.getApplicationContext(), null, null, 1);
         db = DBHelper.getDatabase(this.getApplicationContext());
         get_data = new itemDAO(this);
         result = new Item();
+
         c = Calendar.getInstance();
-        event_array = new ArrayList<>();
+
+        mcv = (MaterialCalendarView) findViewById(R.id.calendarView); //物件實體化
+        mcv.setSelectedDate(c); //預選目前時間
+
+        txtDate = (TextView) findViewById(R.id.txtDate);
+        txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()));
+
+        event_list = (ListView) findViewById(R.id.eventList);   //活動清單物件實體化
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,27 +71,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent toAdd = new Intent(MainActivity.this, AddEventActivity.class);
-                toAdd.putExtra("Date", event_list.getItemAtPosition(0).toString());
+                toAdd.putExtra("Date", txtDate.getText().toString());
                 toAdd.putExtra("Time", time);
                 startActivityForResult(toAdd, 200);
             }
         });
 
-        setTitle("Calendar");
-
-        mcv = (MaterialCalendarView) findViewById(R.id.calendarView); //物件實體化
-        mcv.setSelectedDate(c); //預選目前時間
-
-        event_list = (ListView) findViewById(R.id.eventList);   //活動清單物件實體化
-        refreshList(c);
-
         mcv.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                event_array.clear();
-                event_array.add(convertCalendar(date.getCalendar()));
-                myAd = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, event_array);
-                event_list.setAdapter(myAd);
+                txtDate.setText(convertCalendar(date.getCalendar()));
             }
         });
 
@@ -105,26 +105,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        int tag = 0;
         switch (id) {
             case R.id.mode_month:
                 mcv.state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit();
-                tag = 0;
                 break;
             case R.id.mode_week:
                 mcv.state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit();
-                mcv.goToNext();
-                tag = 1;
                 break;
             case R.id.action_today:
                 mcv.setCurrentDate(c);
                 mcv.setSelectedDate(c);
-                refreshList(c);
+                txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()));
                 break;
         }
-
-        if (tag == 1) mcv.goToNext();
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -132,41 +125,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == RESULT_OK) {
-            Cursor result = db.rawQuery("SELECT _id, Name, Color FROM EventLog", null);
-            if (result.getCount() == 0) {
-                event_array.clear();
-                event_array.add(convertCalendar(mcv.getSelectedDate().getCalendar()));
-                event_array.add("No Event Today");
-                myAd = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, event_array);
-                event_list.setAdapter(myAd);
-            } else if (result.moveToNext()) {
-                ArrayList<Map<String, Object>> itemList = null;
-                for (int i = 0; i < result.getCount(); i++) {
-                    itemList = new ArrayList<>();
-                    HashMap<String, Object> eventLog = new HashMap<>();
-                    eventLog.put("Name", result.getString(1));
-                    eventLog.put("Image", result.getInt(2));
-                    itemList.add(eventLog);
-                }
 
-                SimpleAdapter eventAdapter = new SimpleAdapter(
-                        MainActivity.this,
-                        itemList,
-                        R.layout.row_veiw,
-                        new String[]{"Name", "Image"},
-                        new int[]{R.id.txtName, R.id.imgColor}
-                );
+            result = get_data.get(mcv.getSelectedDate().getCalendar());
+            if (result.getDate_from().equals("")) {
+                txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()) + "No Event");
+            } else {
 
-                event_list.setAdapter(eventAdapter);
             }
-        }
-    }
+//            Cursor result = db.rawQuery("SELECT _id, Name, Color FROM EventLog", null);
+//            if (result.getCount() == 0) {
+//
+//            } else {
+//                while (result.moveToNext()) {
+//                    ArrayList<Map<String, Object>> itemList = null;
+//                    for (int i = 0; i < result.getCount(); i++) {
+//                        itemList = new ArrayList<>();
+//                        HashMap<String, Object> eventLog = new HashMap<>();
+//                        eventLog.put("Image", result.getInt(2));
+//                        eventLog.put("Name", result.getString(1));
+//                        itemList.add(eventLog);
+//                    }
+//
+//                    SimpleAdapter eventAdapter = new SimpleAdapter(
+//                            MainActivity.this,
+//                            itemList,
+//                            R.layout.row_veiw,
+//                            new String[]{"Name", "Image"},
+//                            new int[]{R.id.txtName, R.id.imgColor}
+//                    );
+//
+//                    event_list.setAdapter(eventAdapter);
+//                }
+//            }
 
-    void refreshList(Calendar cal) {
-        event_array = new ArrayList<>();
-        event_array.add(convertCalendar(cal));
-        myAd = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, event_array);
-        event_list.setAdapter(myAd);
+        }
     }
 
     public String convertCalendar(Calendar cal) {

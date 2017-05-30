@@ -70,8 +70,7 @@ public class AddEventActivity extends AppCompatActivity {
 
         edtEventDescription.setHint("活動說明");
         edtEventDescription.setTextColor(Color.BLACK);
-
-        getResources().getDrawable(R.drawable.circle_icon_red, null);
+        colorImage = R.drawable.circle_icon_dim_gray;
 
         //get main data
         getData = getIntent();
@@ -112,7 +111,6 @@ public class AddEventActivity extends AppCompatActivity {
         btnColorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                colorImage = R.drawable.circle_icon_dim_gray;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(AddEventActivity.this);
                 builder.setTitle("活動色彩");
                 builder.setSingleChoiceItems(R.array.colorArray, temp, new DialogInterface.OnClickListener() {

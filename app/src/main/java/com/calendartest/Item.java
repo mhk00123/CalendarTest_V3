@@ -49,90 +49,90 @@ public class Item implements Serializable {
     }
 
     public String getName() {
-        return this.Name == null ? "" : this.Name;
+        return Name == null ? "" : Name;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        Name = name;
     }
 
     public String getLocation() {
-        return this.Location == null ? "" : this.Location;
+        return Location == null ? "" : Location;
     }
 
     public void setLocation(String location) {
-        this.Location = location;
+        Location = location;
     }
 
     public String getDate_from() {
-        return this.Date_from == null ? "" : this.Date_from;
+        return Date_from == null ? "" : Date_from;
     }
 
     public void setDate_from(String date_from) {
-        this.Date_from = date_from;
+        Date_from = date_from;
     }
 
     public String getDate_to() {
-        return this.Date_to == null ? "" : this.Date_from;
+        return Date_to == null ? "" : Date_from;
     }
 
     public void setDate_to(String date_to) {
-        this.Date_to = date_to;
+        Date_to = date_to;
     }
 
     public String getTime_from() {
-        return this.Time_from == null ? "" : this.Time_from;
+        return Time_from == null ? "" : Time_from;
     }
 
     public void setTime_from(String time_from) {
-        this.Time_from = time_from;
+        Time_from = time_from;
     }
 
     public String getTime_to() {
-        return this.Time_to == null ? "" : this.Time_to;
+        return Time_to == null ? "" : Time_to;
     }
 
     public void setTime_to(String time_to) {
-        this.Time_to = time_to;
+        Time_to = time_to;
     }
 
     public String getRepeatFrequency() {
-        return this.RepeatFrequency == null ? "" : this.RepeatFrequency;
+        return RepeatFrequency == null ? "" : RepeatFrequency;
     }
 
     public void setRepeatFrequency(String repeatFrequency) {
-        this.RepeatFrequency = repeatFrequency;
+        RepeatFrequency = repeatFrequency;
     }
 
     public String getPrivacy() {
-        return this.Privacy == null ? "" : this.Privacy;
+        return Privacy == null ? "" : Privacy;
     }
 
     public void setPrivacy(String privacy) {
-        this.Privacy = privacy;
+        Privacy = privacy;
     }
 
     public String getRemind() {
-        return this.Remind == null ? "" : this.Remind;
+        return Remind == null ? "" : Remind;
     }
 
     public void setRemind(String remind) {
-        this.Remind = remind;
+        Remind = remind;
     }
 
     public String getDescription() {
-        return this.Description == null ? "" : this.Description;
+        return Description == null ? "" : Description;
     }
 
     public void setDescription(String description) {
-        this.Description = description;
+        Description = description;
     }
 
     public int getColor() {
-        return this.Color;
+        return Color;
     }
 
     public void setColor(int color) {
-        this.Color = color;
+        Color = color;
     }
 }

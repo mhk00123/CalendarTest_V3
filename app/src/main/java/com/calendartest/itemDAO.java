@@ -86,19 +86,21 @@ public class itemDAO {
         Item item = new Item();
 
         // 使用日期為查詢條件
-//        String where = DATE_FROM_COLUMN + "=" + date;
-
+        String where = DATE_FROM_COLUMN + "=\"" + date + "\"";
+        Log.d("ItemDao", "get: where " + where);
         // 執行查詢
         Cursor result = database.query(TABEL_NAME, null,
-                null, null, null, null, null);
+                where, null, null, null, null);
 
-//        if(result.getCount() > 0){
-//            Log.d("ItemDao", "get: " + result.getCount());
-//            result.moveToFirst();
-//            Log.d("ItemDao", "move to first");
-//        }
+        if(result.getCount() > 0){
+            Log.d("ItemDao", "get: " + result.getCount());
+            result.moveToFirst();
+            Log.d("ItemDao", "move to first");
+        }else{
+            Log.d("ItemDao", "result.getCount() == 0");
+        }
+
         // 如果有資料
-
         if (result.moveToFirst()) {
             item = getRecord(result);
         }

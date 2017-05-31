@@ -86,7 +86,7 @@ public class itemDAO {
         Item item = new Item();
 
         // 使用日期為查詢條件
-        String where = DATE_FROM_COLUMN + "=" + date;
+//        String where = DATE_FROM_COLUMN + "=" + date;
 
         // 執行查詢
         Cursor result = database.query(TABEL_NAME, null,

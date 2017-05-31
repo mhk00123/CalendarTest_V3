@@ -41,19 +41,12 @@ public class AddEventActivity extends AppCompatActivity {
     Intent toMain;
 
     Item data;
-    itemDAO datadao;
-
-    public DBHelper dbHelper;
-    public SQLiteDatabase db;
+    itemDAO data_dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
-        //database control
-        dbHelper = new DBHelper(this.getApplicationContext(), null, null, 1);
-        db = dbHelper.getWritableDatabase();
 
         //UI component
         edtEventName = (EditText) findViewById(R.id.edtEventName);
@@ -87,35 +80,35 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
-        txtDateTo.setOnClickListener(new View.OnClickListener() {
+        txtDateTo.setOnClickListener(new View.OnClickListener() {   //日期選擇事件
             @Override
             public void onClick(View v) {
                 showDataPickerDialogTo();
             }
         });
 
-        txtTimeFrom.setOnClickListener(new View.OnClickListener() {
+        txtTimeFrom.setOnClickListener(new View.OnClickListener() { //時間選擇事件
             @Override
             public void onClick(View v) {
                 showTimePickerDialogFrom();
             }
         });
 
-        txtTimeTo.setOnClickListener(new View.OnClickListener() {
+        txtTimeTo.setOnClickListener(new View.OnClickListener() {   //時間選擇事件
             @Override
             public void onClick(View v) {
                 showTimePickerDialogTo();
             }
         });
 
-        btnColorPicker.setOnClickListener(new View.OnClickListener() {
+        btnColorPicker.setOnClickListener(new View.OnClickListener() {  //顏色選擇鈕
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(AddEventActivity.this);
                 builder.setTitle("活動色彩");
                 builder.setSingleChoiceItems(R.array.colorArray, temp, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which) {    //單選對話框事件
                         switch (which) {
                             case 0:
                                 btnColorPicker.setImageResource(R.drawable.palette_dimgray);
@@ -172,7 +165,7 @@ public class AddEventActivity extends AppCompatActivity {
         });
 
         data = new Item();
-        datadao = new itemDAO(this.getApplicationContext());
+        data_dao = new itemDAO(this.getApplicationContext());
 
     }
 
@@ -188,7 +181,7 @@ public class AddEventActivity extends AppCompatActivity {
             case R.id.addSave:
                 getString();    //get all component text
                 setData();  //input to item class
-                datadao.insert(data);   //input to DB
+                data_dao.insert(data);   //input to DB
                 toMain = new Intent();
                 toMain.putExtra("Image", colorImage);
                 setResult(RESULT_OK, toMain);

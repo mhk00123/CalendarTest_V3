@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -32,13 +33,9 @@ public class MainActivity extends AppCompatActivity {
     TextView txtDate;
     Calendar c; //時間物件
     ListView event_list;    //活動清單物件
-    ArrayAdapter<String> myAd;  //清單內容排版物件，可自訂清單內容與排版
 
-    itemDAO get_data;
-    Item result;
-
-    public DBHelper dbHelper;
-    public SQLiteDatabase db;
+    Item item;
+    itemDAO item_dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setTitle("Calendar");
-
-        dbHelper = new DBHelper(this.getApplicationContext(), null, null, 1);
-        db = DBHelper.getDatabase(this.getApplicationContext());
-        get_data = new itemDAO(this);
-        result = new Item();
 
         c = Calendar.getInstance();
 
@@ -83,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 txtDate.setText(convertCalendar(date.getCalendar()));
             }
         });
+
+        item = new Item();
+        item_dao = new itemDAO(MainActivity.this);
 
     }
 
@@ -126,37 +121,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == RESULT_OK) {
 
-            result = get_data.get(mcv.getSelectedDate().getCalendar());
-            if (result.getDate_from().equals("")) {
-                txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()) + "No Event");
-            } else {
+            item = item_dao.get(mcv.getSelectedDate().getCalendar());
+            if (item.getDate_from().equals(""))
+                txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()) + "\nNo Event");
+            else {
+                txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()));
+                HashMap<String, Object> item_map = new HashMap<>();
+                item_map.put("Color", item.getColor());
+                item_map.put("Name", item.getName());
 
+                ArrayList<Map<String, Object>> item_list = new ArrayList<>();
+                item_list.add(item_map);
+
+                SimpleAdapter adapter = new SimpleAdapter(
+                        MainActivity.this,
+                        item_list,
+                        R.layout.row_veiw,
+                        new String[]{"Color", "Name"},
+                        new int[]{R.id.imgColor, R.id.txtName}
+                );
+
+                event_list.setAdapter(adapter);
             }
-//            Cursor result = db.rawQuery("SELECT _id, Name, Color FROM EventLog", null);
-//            if (result.getCount() == 0) {
-//
-//            } else {
-//                while (result.moveToNext()) {
-//                    ArrayList<Map<String, Object>> itemList = null;
-//                    for (int i = 0; i < result.getCount(); i++) {
-//                        itemList = new ArrayList<>();
-//                        HashMap<String, Object> eventLog = new HashMap<>();
-//                        eventLog.put("Image", result.getInt(2));
-//                        eventLog.put("Name", result.getString(1));
-//                        itemList.add(eventLog);
-//                    }
-//
-//                    SimpleAdapter eventAdapter = new SimpleAdapter(
-//                            MainActivity.this,
-//                            itemList,
-//                            R.layout.row_veiw,
-//                            new String[]{"Name", "Image"},
-//                            new int[]{R.id.txtName, R.id.imgColor}
-//                    );
-//
-//                    event_list.setAdapter(eventAdapter);
-//                }
-//            }
 
         }
     }

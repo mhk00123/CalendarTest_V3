@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public static SQLiteDatabase getDatabase(Context context) {
+    public static SQLiteDatabase getDatabase(Context context) { //建立並取得資料庫
         if (database == null || !database.isOpen()) {
             database = new DBHelper(context, DATABASE_NAME,
                     null, DATABASE_VERSION).getWritableDatabase();

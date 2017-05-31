@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by user on 2017/5/26.
@@ -80,7 +83,7 @@ public class itemDAO {
         return item;
     }
 
-    public Item get(Calendar cal) { //查詢資料
+    public ArrayList<Item> get(Calendar cal) { //查詢資料
         String date = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH);
 
         Item item = new Item();
@@ -92,23 +95,30 @@ public class itemDAO {
         Cursor result = database.query(TABEL_NAME, null,
                 where, null, null, null, null);
 
-        if(result.getCount() > 0){
-            Log.d("ItemDao", "get: " + result.getCount());
-            result.moveToFirst();
-            Log.d("ItemDao", "move to first");
-        }else{
-            Log.d("ItemDao", "result.getCount() == 0");
-        }
+
+//  Debug State
+//        if (result.getCount() > 0) {
+//            Log.d("ItemDao", "get: " + result.getCount());
+//            result.moveToFirst();
+//            Log.d("ItemDao", "move to first");
+//        } else {
+//            Log.d("ItemDao", "result.getCount() == 0");
+//        }
 
         // 如果有資料
+        ArrayList<Item> item_get_all = new ArrayList<>();
+
         if (result.moveToFirst()) {
-            item = getRecord(result);
+            while (result.moveToNext()) {
+                item = getRecord(result);
+                item_get_all.add(item);
+            }
         }
 
         result.close();
 
         // 回傳結果
-        return item;
+        return item_get_all;
     }
 
     public Item getRecord(Cursor cursor) {
@@ -126,7 +136,6 @@ public class itemDAO {
         result.setRemind(cursor.getString(9));
         result.setDescription(cursor.getString(10));
         result.setColor(cursor.getInt(11));
-
 
         return result;
     }

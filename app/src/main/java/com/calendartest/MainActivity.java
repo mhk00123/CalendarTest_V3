@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -121,21 +120,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 200 && resultCode == RESULT_OK) {
 
-            item = item_dao.get(mcv.getSelectedDate().getCalendar());
-            if (item.getDate_from().equals(""))
+            ArrayList<Item> item_get = item_dao.get(mcv.getSelectedDate().getCalendar());
+            ArrayList<Map<String, Object>> eventArray = new ArrayList<>();
+            if (item_get == null)
                 txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()) + "\nNo Event");
             else {
                 txtDate.setText(convertCalendar(mcv.getSelectedDate().getCalendar()));
-                HashMap<String, Object> item_map = new HashMap<>();
-                item_map.put("Color", item.getColor());
-                item_map.put("Name", item.getName());
-
-                ArrayList<Map<String, Object>> item_list = new ArrayList<>();
-                item_list.add(item_map);
+                for (int i = 0; i < item_get.size(); i++) {
+                    HashMap<String, Object> item_map = new HashMap<>();
+                    item_map.put("Color", item_get.get(i).getColor());
+                    item_map.put("Name", item_get.get(i).getName());
+                    eventArray.add(item_map);
+                }
 
                 SimpleAdapter adapter = new SimpleAdapter(
                         MainActivity.this,
-                        item_list,
+                        eventArray,
                         R.layout.row_veiw,
                         new String[]{"Color", "Name"},
                         new int[]{R.id.imgColor, R.id.txtName}
